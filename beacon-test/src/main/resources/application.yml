@@ -1,0 +1,23 @@
+server:
+  port: 20000
+spring:
+  #服务名称
+  application:
+    name: beacon-test
+  #多环境
+  profiles:
+    active: dev
+  #nacos服务连接
+  cloud:
+    nacos:
+      discovery:
+        server-addr: 10.179.78.217:8848
+  #数据源
+  datasource:
+    driver-class-name: com.mysql.jdbc.Driver
+    url: jdbc:mysql://10.179.78.217:3306/beacon_cloud?serverTimezone=Asia/Shanghai&useSSL=false
+    username: root
+    password: root
+mybatis:
+  configuration:
+    map-underscore-to-camel-case: true

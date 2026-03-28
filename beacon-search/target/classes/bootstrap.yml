@@ -1,0 +1,14 @@
+spring:
+  application:
+    name: beacon-search
+  profiles:
+    active: dev
+  cloud:
+    nacos:
+      discovery:
+        server-addr: 10.179.78.217:8848
+      # nacos配置中心地址:
+      config:
+        server-addr: 10.179.78.217:8848
+        file-extension: yml
+        #beacon-search-dev.yml
