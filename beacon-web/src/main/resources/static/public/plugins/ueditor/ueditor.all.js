@@ -29734,21 +29734,6 @@
 
         me.addListener('ready', function () {
             holder = document.getElementById(me.ui.id + '_message_holder');
-=======
-// adapter/dirtyword.js
-UE.registerUI('message', function(editor) {
-
-    var editorui = baidu.editor.ui;
-    var Message = editorui.Message;
-    var holder;
-    var _messageItems = [];
-    var me = editor;
-
-    me.addListener('ready', function(){
-        holder = document.getElementById(me.ui.id + '_message_holder');
-        updateHolderPos();
-        setTimeout(function(){
->>>>>>> 097f78d415df8389afeed0abd1d702050206e10c
             updateHolderPos();
             setTimeout(function () {
                 updateHolderPos();
@@ -29796,7 +29781,7 @@ UE.registerUI('message', function(editor) {
             holder.style.zIndex = Math.max(me.options.zIndex, me.iframe.style.zIndex) + 1;
         }
 
-    });
+    });  // ← 这里缺少了闭合的 } 和 )
 
 
 // adapter/autosave.js
