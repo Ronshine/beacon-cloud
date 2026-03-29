@@ -1,0 +1,5 @@
+shiro:
+  loginUrl: login.html
+  unauthorizedUrl: unauthorized.html
+server:
+  port: 8888
