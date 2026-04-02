@@ -31,6 +31,46 @@ public class SmsUser {
 
     private String extend4;
 
+    public SmsUser() {
+    }
+
+    public SmsUser(Integer id, String username, String password, String salt, String nickname, Date created, Long createId, Date updated, Long updateId, Byte isDelete, String extend1, String extend2, String extend3, String extend4) {
+        this.id = id;
+        this.username = username;
+        this.password = password;
+        this.salt = salt;
+        this.nickname = nickname;
+        this.created = created;
+        this.createId = createId;
+        this.updated = updated;
+        this.updateId = updateId;
+        this.isDelete = isDelete;
+        this.extend1 = extend1;
+        this.extend2 = extend2;
+        this.extend3 = extend3;
+        this.extend4 = extend4;
+    }
+
+    @Override
+    public String toString() {
+        return "SmsUser{" +
+                "id=" + id +
+                ", username='" + username + '\'' +
+                ", password='" + password + '\'' +
+                ", salt='" + salt + '\'' +
+                ", nickname='" + nickname + '\'' +
+                ", created=" + created +
+                ", createId=" + createId +
+                ", updated=" + updated +
+                ", updateId=" + updateId +
+                ", isDelete=" + isDelete +
+                ", extend1='" + extend1 + '\'' +
+                ", extend2='" + extend2 + '\'' +
+                ", extend3='" + extend3 + '\'' +
+                ", extend4='" + extend4 + '\'' +
+                '}';
+    }
+
     public Integer getId() {
         return id;
     }
