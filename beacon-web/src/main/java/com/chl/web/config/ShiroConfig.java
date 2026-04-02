@@ -16,8 +16,9 @@ public class ShiroConfig {
     @Bean
     public ShiroFilterChainDefinition shiroFilterChainDefinition(){
         //1、创建需要认证和放行资源
-        Map<String, String> filterChainDefinitionMap = new LinkedHashMap();
+        Map<String, String> filterChainDefinitionMap = new LinkedHashMap<>();
 
+        filterChainDefinitionMap.put("/public/**","anon");
         filterChainDefinitionMap.put("/sys/user/login","anon");
         filterChainDefinitionMap.put("/index.html","anon");
         filterChainDefinitionMap.put("/login.html","anon");

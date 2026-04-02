@@ -1,5 +1,7 @@
 package com.chl.web.realm;
 
+import com.chl.web.entity.SmsUser;
+import com.chl.web.service.SmsUserService;
 import org.apache.shiro.authc.AuthenticationException;
 import org.apache.shiro.authc.AuthenticationInfo;
 import org.apache.shiro.authc.AuthenticationToken;
@@ -9,11 +11,11 @@ import org.apache.shiro.authz.AuthorizationInfo;
 import org.apache.shiro.realm.AuthorizingRealm;
 import org.apache.shiro.subject.PrincipalCollection;
 import org.apache.shiro.util.ByteSource;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 @Component
 public class ShiroRealm extends AuthorizingRealm {
-
     {
         //设置加密方式MD5以及加密次数
         HashedCredentialsMatcher matcher = new HashedCredentialsMatcher();
@@ -21,6 +23,9 @@ public class ShiroRealm extends AuthorizingRealm {
         matcher.setHashIterations(1024);
         this.setCredentialsMatcher(matcher);
     }
+
+    @Autowired
+    private SmsUserService service;
 
     /**
      * 认证
@@ -32,18 +37,16 @@ public class ShiroRealm extends AuthorizingRealm {
         //1、获得用户名
         String username = (String) token.getPrincipal();
 
+        //2、获取数据库查询对象
+        SmsUser smsUser = service.findUserByUsername(username);
+
         //判断是否用户名正确如果不正确就直接返回null
-        if (username == null || !username.equals("admin")){
+        if (username == null){
             return null;
         }
 
-        //2、获取密码和盐 （模拟数据库操作）
-        String salt = "09a8424ed5bf4373af6530fec2b29c0f";
-        String password = "b39dc5da02d002e6ac581e5bb929d2e5";
         //3、创建返回的信息对象
-        AuthenticationInfo info = new SimpleAuthenticationInfo(username,password, ByteSource.Util.bytes(salt),"shiroRealm");
-
-        return info;
+        return new SimpleAuthenticationInfo(smsUser,smsUser.getPassword(), ByteSource.Util.bytes(smsUser.getSalt()),"shiroRealm");
     }
 
     /**
