@@ -22,7 +22,7 @@ public class KaptchaController {
     @Autowired
     private DefaultKaptcha kaptcha;
 
-    @GetMapping("/kaptcha.jpg")
+    @GetMapping("/captcha.jpg")
     public void kaptcha(HttpServletResponse resp){
         //1、验证码图片不需要做存储和缓存
         resp.setHeader("Cache-Control","no-store, no-cache");
