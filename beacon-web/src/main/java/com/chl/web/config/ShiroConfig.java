@@ -20,6 +20,7 @@ public class ShiroConfig {
 
         filterChainDefinitionMap.put("/public/**","anon");
         filterChainDefinitionMap.put("/sys/user/login","anon");
+        filterChainDefinitionMap.put("/kaptcha.jpg","anon");
         filterChainDefinitionMap.put("/index.html","anon");
         filterChainDefinitionMap.put("/login.html","anon");
         filterChainDefinitionMap.put("/logout","logout");
