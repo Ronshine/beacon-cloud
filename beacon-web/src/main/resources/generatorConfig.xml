@@ -12,7 +12,7 @@
         </commentGenerator>
 
         <jdbcConnection driverClass="com.mysql.jdbc.Driver"
-                        connectionURL="jdbc:mysql://10.179.78.217:3306/beacon_cloud?characterEncoding=utf-8"
+                        connectionURL="jdbc:mysql://10.11.199.217:3306/beacon_cloud?characterEncoding=utf-8"
                         userId="root"
                         password="root">
         </jdbcConnection>

@@ -18,6 +18,9 @@ public enum ExceptionEnum {
     SEARCH_NOT_SEND(-19,"写入数据失败！！"),
     SEARCH_UPDATE_ERROR(-20,"更新数据失败！！"),
     UNKNOWN_ERROR(-999,"未知错误!!!"),
+    PARAMETER_ERROR(-100,"参数不合法"),
+    CAPTCHA_ERROR(-101,"验证码错误"),
+    AUTHENTICATION_ERROR(-102,"用户名或验证码错误"),
     ;
 
     private final Integer code;

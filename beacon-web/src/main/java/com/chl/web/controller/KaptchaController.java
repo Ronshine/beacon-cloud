@@ -1,6 +1,8 @@
 package com.chl.web.controller;
 
+import com.chl.common.constant.WebConstants;
 import com.google.code.kaptcha.impl.DefaultKaptcha;
+import org.apache.shiro.SecurityUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -33,10 +35,13 @@ public class KaptchaController {
         //3、生成验证码文字
         String text = kaptcha.createText();
 
-        //4、基于文字生成对应的图片
+        //4、将获取的验证码存储到session域中
+        SecurityUtils.getSubject().getSession().setAttribute(WebConstants.KAPTCHA,text);
+
+        //5、基于文字生成对应的图片
         BufferedImage image = kaptcha.createImage(text);
 
-        //5、写回验证码图片信息
+        //6、写回验证码图片信息
         try {
             ServletOutputStream outputStream = resp.getOutputStream();
             ImageIO.write(image,JPG,outputStream);
