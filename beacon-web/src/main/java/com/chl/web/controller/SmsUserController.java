@@ -5,22 +5,27 @@ import com.chl.common.enums.ExceptionEnum;
 import com.chl.common.utils.R;
 import com.chl.common.vo.ResultVO;
 import com.chl.web.dto.UserDTO;
+import com.chl.web.entity.SmsUser;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.shiro.SecurityUtils;
 import org.apache.shiro.authc.AuthenticationException;
 import org.apache.shiro.authc.UsernamePasswordToken;
 import org.springframework.validation.BindingResult;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
+import java.util.HashMap;
+import java.util.Map;
 
 @RestController
 @RequestMapping("/sys")
 @Slf4j
 public class SmsUserController {
+    /**
+     * 登入接口
+     * @param userDTO 用户数据传输对象
+     * @param bindingResult  参数校验
+     */
     @PostMapping("/login")
     public ResultVO login(@RequestBody @Valid UserDTO userDTO, BindingResult bindingResult){
         //1、非空校验
@@ -48,5 +53,21 @@ public class SmsUserController {
         }
 
         return R.ok();
+    }
+
+    @GetMapping("/user/info")
+    public ResultVO info(){
+        //1、获取登入的用户信息
+        SmsUser smsUser = (SmsUser) SecurityUtils.getSubject().getPrincipal();
+        if (smsUser == null){
+            log.info("【获取用户信息】 该用户未登录");
+            return R.error(ExceptionEnum.NOT_LOGIN);
+        }
+
+        //2、封装返回数据
+        Map<String,Object> map = new HashMap<>();
+        map.put("nickname",smsUser.getNickname());
+        map.put("username",smsUser.getUsername());
+        return R.ok(map);
     }
 }
