@@ -3,6 +3,9 @@ package com.chl.web.mapper;
 import com.chl.web.entity.SmsMenu;
 import com.chl.web.entity.SmsMenuExample;
 import java.util.List;
+import java.util.Map;
+import java.util.Objects;
+
 import org.apache.ibatis.annotations.Param;
 
 public interface SmsMenuMapper {
@@ -27,4 +30,6 @@ public interface SmsMenuMapper {
     int updateByPrimaryKeySelective(SmsMenu row);
 
     int updateByPrimaryKey(SmsMenu row);
+
+    List<Map<String, Object>> findMenuByUserId(@Param("userId") Integer id);
 }

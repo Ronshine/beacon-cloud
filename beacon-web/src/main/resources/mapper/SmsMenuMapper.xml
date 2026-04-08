@@ -382,4 +382,16 @@
       extend4 = #{extend4,jdbcType=VARCHAR}
     where id = #{id,jdbcType=INTEGER}
   </update>
+  <select id="findMenuByUserId" resultType="java.util.Map">
+    select
+      m.id,m.name,m.parent_id parentId,m.url,m.icon,m.type
+    from
+      sms_menu m
+        inner join sms_role_menu rm on m.id = rm.menu_id
+        inner join sms_user_role ur on ur.role_id = rm.role_id
+    where
+      ur.user_id = #{userId}
+      and m.type in (0,1)
+    ORDER BY m.type
+  </select>
 </mapper>
