@@ -3,6 +3,7 @@ package com.chl.common.utils;
 import com.chl.common.enums.ExceptionEnum;
 import com.chl.common.vo.ResultVO;
 
+import java.util.List;
 import java.util.Map;
 
 /**
@@ -18,11 +19,19 @@ public class R {
     }
 
     /**
-     * 正确响应,有数据
+     * 正确响应,有数据Map<String,Object>
      * @return ResultVO响应对象
      */
     public static ResultVO ok(Map<String,Object> map){
         return new ResultVO(0,"", map);
+    }
+
+    /**
+     * 正确响应,有数据Map<String,Object>
+     * @return ResultVO响应对象
+     */
+    public static ResultVO ok(List<Map<String,Object>> list){
+        return new ResultVO(0,"", list);
     }
 
     /**
