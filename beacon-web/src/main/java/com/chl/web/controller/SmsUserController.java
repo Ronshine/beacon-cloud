@@ -6,21 +6,28 @@ import com.chl.common.utils.R;
 import com.chl.common.vo.ResultVO;
 import com.chl.web.dto.UserDTO;
 import com.chl.web.entity.SmsUser;
+import com.chl.web.service.SmsMenuService;
+import com.chl.web.service.SmsUserService;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.shiro.SecurityUtils;
 import org.apache.shiro.authc.AuthenticationException;
 import org.apache.shiro.authc.UsernamePasswordToken;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 @RestController
 @RequestMapping("/sys")
 @Slf4j
 public class SmsUserController {
+    @Autowired
+    private SmsMenuService smsMenuService;
+
     /**
      * 登入接口
      * @param userDTO 用户数据传输对象
@@ -55,6 +62,9 @@ public class SmsUserController {
         return R.ok();
     }
 
+    /**
+     * 获取用户信息接口
+     */
     @GetMapping("/user/info")
     public ResultVO info(){
         //1、获取登入的用户信息
@@ -69,5 +79,24 @@ public class SmsUserController {
         map.put("nickname",smsUser.getNickname());
         map.put("username",smsUser.getUsername());
         return R.ok(map);
+    }
+
+    @GetMapping("/menu/user")
+    public ResultVO menuList(){
+        //获取登入用户对象
+        SmsUser smsUser = (SmsUser) SecurityUtils.getSubject().getPrincipal();
+        if (smsUser == null){
+            log.info("【获取用户信息】 该用户未登录");
+            return R.error(ExceptionEnum.NOT_LOGIN);
+        }
+
+        //获取查询到的对应用户id的菜单信息
+        List<Map<String, Object>> list = smsMenuService.findMenuByUserId(smsUser.getId());
+        if (list == null){
+            log.info("【获取用户对应菜单】 获取菜单失败！用户id : {}",smsUser.getId());
+            return R.error(ExceptionEnum.MAKE_MENU_FAIL);
+        }
+
+        return R.ok(list);
     }
 }
