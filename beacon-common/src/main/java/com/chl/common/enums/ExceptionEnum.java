@@ -21,7 +21,9 @@ public enum ExceptionEnum {
     PARAMETER_ERROR(-100,"参数不合法"),
     CAPTCHA_ERROR(-101,"验证码错误"),
     AUTHENTICATION_ERROR(-102,"用户名或验证码错误"),
-    NOT_LOGIN(-103, "用户未登录");
+    NOT_LOGIN(-103, "用户未登录"),
+    MAKE_MENU_FAIL(-104, "获取菜单列表失败!!"),
+    ;
 
     private final Integer code;
     private final String msg;
