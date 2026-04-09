@@ -1,9 +1,16 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="com.chl.web.mapper.SmsRoleMapper">
-  <resultMap id="BaseResultMap" type="com.chl.web.entity.SmsRole">
-    <id column="id" jdbcType="INTEGER" property="id" />
-    <result column="name" jdbcType="VARCHAR" property="name" />
+<mapper namespace="com.chl.web.mapper.ClientBusinessMapper">
+  <resultMap id="BaseResultMap" type="com.chl.web.entity.ClientBusiness">
+    <id column="id" jdbcType="BIGINT" property="id" />
+    <result column="corpname" jdbcType="VARCHAR" property="corpname" />
+    <result column="apikey" jdbcType="VARCHAR" property="apikey" />
+    <result column="ip_address" jdbcType="VARCHAR" property="ipAddress" />
+    <result column="is_callback" jdbcType="TINYINT" property="isCallback" />
+    <result column="callback_url" jdbcType="VARCHAR" property="callbackUrl" />
+    <result column="client_linkname" jdbcType="VARCHAR" property="clientLinkname" />
+    <result column="client_phone" jdbcType="VARCHAR" property="clientPhone" />
+    <result column="client_filters" jdbcType="VARCHAR" property="clientFilters" />
     <result column="created" jdbcType="TIMESTAMP" property="created" />
     <result column="create_id" jdbcType="BIGINT" property="createId" />
     <result column="updated" jdbcType="TIMESTAMP" property="updated" />
@@ -73,16 +80,17 @@
     </where>
   </sql>
   <sql id="Base_Column_List">
-    id, name, created, create_id, updated, update_id, is_delete, extend1, extend2, extend3, 
-    extend4
+    id, corpname, apikey, ip_address, is_callback, callback_url, client_linkname, client_phone, 
+    client_filters, created, create_id, updated, update_id, is_delete, extend1, extend2, 
+    extend3, extend4
   </sql>
-  <select id="selectByExample" parameterType="com.chl.web.entity.SmsRoleExample" resultMap="BaseResultMap">
+  <select id="selectByExample" parameterType="com.chl.web.entity.ClientBusinessExample" resultMap="BaseResultMap">
     select
     <if test="distinct">
       distinct
     </if>
     <include refid="Base_Column_List" />
-    from sms_role
+    from client_business
     <if test="_parameter != null">
       <include refid="Example_Where_Clause" />
     </if>
@@ -90,40 +98,67 @@
       order by ${orderByClause}
     </if>
   </select>
-  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+  <select id="selectByPrimaryKey" parameterType="java.lang.Long" resultMap="BaseResultMap">
     select 
     <include refid="Base_Column_List" />
-    from sms_role
-    where id = #{id,jdbcType=INTEGER}
+    from client_business
+    where id = #{id,jdbcType=BIGINT}
   </select>
-  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
-    delete from sms_role
-    where id = #{id,jdbcType=INTEGER}
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
+    delete from client_business
+    where id = #{id,jdbcType=BIGINT}
   </delete>
-  <delete id="deleteByExample" parameterType="com.chl.web.entity.SmsRoleExample">
-    delete from sms_role
+  <delete id="deleteByExample" parameterType="com.chl.web.entity.ClientBusinessExample">
+    delete from client_business
     <if test="_parameter != null">
       <include refid="Example_Where_Clause" />
     </if>
   </delete>
-  <insert id="insert" parameterType="com.chl.web.entity.SmsRole">
-    insert into sms_role (id, name, created, 
-      create_id, updated, update_id, 
-      is_delete, extend1, extend2, 
-      extend3, extend4)
-    values (#{id,jdbcType=INTEGER}, #{name,jdbcType=VARCHAR}, #{created,jdbcType=TIMESTAMP}, 
-      #{createId,jdbcType=BIGINT}, #{updated,jdbcType=TIMESTAMP}, #{updateId,jdbcType=BIGINT}, 
-      #{isDelete,jdbcType=TINYINT}, #{extend1,jdbcType=VARCHAR}, #{extend2,jdbcType=VARCHAR}, 
-      #{extend3,jdbcType=VARCHAR}, #{extend4,jdbcType=VARCHAR})
+  <insert id="insert" parameterType="com.chl.web.entity.ClientBusiness">
+    insert into client_business (id, corpname, apikey, 
+      ip_address, is_callback, callback_url, 
+      client_linkname, client_phone, client_filters, 
+      created, create_id, updated, 
+      update_id, is_delete, extend1, 
+      extend2, extend3, extend4
+      )
+    values (#{id,jdbcType=BIGINT}, #{corpname,jdbcType=VARCHAR}, #{apikey,jdbcType=VARCHAR}, 
+      #{ipAddress,jdbcType=VARCHAR}, #{isCallback,jdbcType=TINYINT}, #{callbackUrl,jdbcType=VARCHAR}, 
+      #{clientLinkname,jdbcType=VARCHAR}, #{clientPhone,jdbcType=VARCHAR}, #{clientFilters,jdbcType=VARCHAR}, 
+      #{created,jdbcType=TIMESTAMP}, #{createId,jdbcType=BIGINT}, #{updated,jdbcType=TIMESTAMP}, 
+      #{updateId,jdbcType=BIGINT}, #{isDelete,jdbcType=TINYINT}, #{extend1,jdbcType=VARCHAR}, 
+      #{extend2,jdbcType=VARCHAR}, #{extend3,jdbcType=VARCHAR}, #{extend4,jdbcType=VARCHAR}
+      )
   </insert>
-  <insert id="insertSelective" parameterType="com.chl.web.entity.SmsRole">
-    insert into sms_role
+  <insert id="insertSelective" parameterType="com.chl.web.entity.ClientBusiness">
+    insert into client_business
     <trim prefix="(" suffix=")" suffixOverrides=",">
       <if test="id != null">
         id,
       </if>
-      <if test="name != null">
-        name,
+      <if test="corpname != null">
+        corpname,
+      </if>
+      <if test="apikey != null">
+        apikey,
+      </if>
+      <if test="ipAddress != null">
+        ip_address,
+      </if>
+      <if test="isCallback != null">
+        is_callback,
+      </if>
+      <if test="callbackUrl != null">
+        callback_url,
+      </if>
+      <if test="clientLinkname != null">
+        client_linkname,
+      </if>
+      <if test="clientPhone != null">
+        client_phone,
+      </if>
+      <if test="clientFilters != null">
+        client_filters,
       </if>
       <if test="created != null">
         created,
@@ -155,10 +190,31 @@
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides=",">
       <if test="id != null">
-        #{id,jdbcType=INTEGER},
+        #{id,jdbcType=BIGINT},
       </if>
-      <if test="name != null">
-        #{name,jdbcType=VARCHAR},
+      <if test="corpname != null">
+        #{corpname,jdbcType=VARCHAR},
+      </if>
+      <if test="apikey != null">
+        #{apikey,jdbcType=VARCHAR},
+      </if>
+      <if test="ipAddress != null">
+        #{ipAddress,jdbcType=VARCHAR},
+      </if>
+      <if test="isCallback != null">
+        #{isCallback,jdbcType=TINYINT},
+      </if>
+      <if test="callbackUrl != null">
+        #{callbackUrl,jdbcType=VARCHAR},
+      </if>
+      <if test="clientLinkname != null">
+        #{clientLinkname,jdbcType=VARCHAR},
+      </if>
+      <if test="clientPhone != null">
+        #{clientPhone,jdbcType=VARCHAR},
+      </if>
+      <if test="clientFilters != null">
+        #{clientFilters,jdbcType=VARCHAR},
       </if>
       <if test="created != null">
         #{created,jdbcType=TIMESTAMP},
@@ -189,20 +245,41 @@
       </if>
     </trim>
   </insert>
-  <select id="countByExample" parameterType="com.chl.web.entity.SmsRoleExample" resultType="java.lang.Long">
-    select count(*) from sms_role
+  <select id="countByExample" parameterType="com.chl.web.entity.ClientBusinessExample" resultType="java.lang.Long">
+    select count(*) from client_business
     <if test="_parameter != null">
       <include refid="Example_Where_Clause" />
     </if>
   </select>
   <update id="updateByExampleSelective" parameterType="map">
-    update sms_role
+    update client_business
     <set>
       <if test="row.id != null">
-        id = #{row.id,jdbcType=INTEGER},
+        id = #{row.id,jdbcType=BIGINT},
       </if>
-      <if test="row.name != null">
-        name = #{row.name,jdbcType=VARCHAR},
+      <if test="row.corpname != null">
+        corpname = #{row.corpname,jdbcType=VARCHAR},
+      </if>
+      <if test="row.apikey != null">
+        apikey = #{row.apikey,jdbcType=VARCHAR},
+      </if>
+      <if test="row.ipAddress != null">
+        ip_address = #{row.ipAddress,jdbcType=VARCHAR},
+      </if>
+      <if test="row.isCallback != null">
+        is_callback = #{row.isCallback,jdbcType=TINYINT},
+      </if>
+      <if test="row.callbackUrl != null">
+        callback_url = #{row.callbackUrl,jdbcType=VARCHAR},
+      </if>
+      <if test="row.clientLinkname != null">
+        client_linkname = #{row.clientLinkname,jdbcType=VARCHAR},
+      </if>
+      <if test="row.clientPhone != null">
+        client_phone = #{row.clientPhone,jdbcType=VARCHAR},
+      </if>
+      <if test="row.clientFilters != null">
+        client_filters = #{row.clientFilters,jdbcType=VARCHAR},
       </if>
       <if test="row.created != null">
         created = #{row.created,jdbcType=TIMESTAMP},
@@ -237,9 +314,16 @@
     </if>
   </update>
   <update id="updateByExample" parameterType="map">
-    update sms_role
-    set id = #{row.id,jdbcType=INTEGER},
-      name = #{row.name,jdbcType=VARCHAR},
+    update client_business
+    set id = #{row.id,jdbcType=BIGINT},
+      corpname = #{row.corpname,jdbcType=VARCHAR},
+      apikey = #{row.apikey,jdbcType=VARCHAR},
+      ip_address = #{row.ipAddress,jdbcType=VARCHAR},
+      is_callback = #{row.isCallback,jdbcType=TINYINT},
+      callback_url = #{row.callbackUrl,jdbcType=VARCHAR},
+      client_linkname = #{row.clientLinkname,jdbcType=VARCHAR},
+      client_phone = #{row.clientPhone,jdbcType=VARCHAR},
+      client_filters = #{row.clientFilters,jdbcType=VARCHAR},
       created = #{row.created,jdbcType=TIMESTAMP},
       create_id = #{row.createId,jdbcType=BIGINT},
       updated = #{row.updated,jdbcType=TIMESTAMP},
@@ -253,11 +337,32 @@
       <include refid="Update_By_Example_Where_Clause" />
     </if>
   </update>
-  <update id="updateByPrimaryKeySelective" parameterType="com.chl.web.entity.SmsRole">
-    update sms_role
+  <update id="updateByPrimaryKeySelective" parameterType="com.chl.web.entity.ClientBusiness">
+    update client_business
     <set>
-      <if test="name != null">
-        name = #{name,jdbcType=VARCHAR},
+      <if test="corpname != null">
+        corpname = #{corpname,jdbcType=VARCHAR},
+      </if>
+      <if test="apikey != null">
+        apikey = #{apikey,jdbcType=VARCHAR},
+      </if>
+      <if test="ipAddress != null">
+        ip_address = #{ipAddress,jdbcType=VARCHAR},
+      </if>
+      <if test="isCallback != null">
+        is_callback = #{isCallback,jdbcType=TINYINT},
+      </if>
+      <if test="callbackUrl != null">
+        callback_url = #{callbackUrl,jdbcType=VARCHAR},
+      </if>
+      <if test="clientLinkname != null">
+        client_linkname = #{clientLinkname,jdbcType=VARCHAR},
+      </if>
+      <if test="clientPhone != null">
+        client_phone = #{clientPhone,jdbcType=VARCHAR},
+      </if>
+      <if test="clientFilters != null">
+        client_filters = #{clientFilters,jdbcType=VARCHAR},
       </if>
       <if test="created != null">
         created = #{created,jdbcType=TIMESTAMP},
@@ -287,11 +392,18 @@
         extend4 = #{extend4,jdbcType=VARCHAR},
       </if>
     </set>
-    where id = #{id,jdbcType=INTEGER}
+    where id = #{id,jdbcType=BIGINT}
   </update>
-  <update id="updateByPrimaryKey" parameterType="com.chl.web.entity.SmsRole">
-    update sms_role
-    set name = #{name,jdbcType=VARCHAR},
+  <update id="updateByPrimaryKey" parameterType="com.chl.web.entity.ClientBusiness">
+    update client_business
+    set corpname = #{corpname,jdbcType=VARCHAR},
+      apikey = #{apikey,jdbcType=VARCHAR},
+      ip_address = #{ipAddress,jdbcType=VARCHAR},
+      is_callback = #{isCallback,jdbcType=TINYINT},
+      callback_url = #{callbackUrl,jdbcType=VARCHAR},
+      client_linkname = #{clientLinkname,jdbcType=VARCHAR},
+      client_phone = #{clientPhone,jdbcType=VARCHAR},
+      client_filters = #{clientFilters,jdbcType=VARCHAR},
       created = #{created,jdbcType=TIMESTAMP},
       create_id = #{createId,jdbcType=BIGINT},
       updated = #{updated,jdbcType=TIMESTAMP},
@@ -301,7 +413,6 @@
       extend2 = #{extend2,jdbcType=VARCHAR},
       extend3 = #{extend3,jdbcType=VARCHAR},
       extend4 = #{extend4,jdbcType=VARCHAR}
-    where id = #{id,jdbcType=INTEGER}
+    where id = #{id,jdbcType=BIGINT}
   </update>
-
 </mapper>

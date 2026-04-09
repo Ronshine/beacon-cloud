@@ -6,9 +6,9 @@ spring:
   cloud:
     nacos:
       discovery:
-        server-addr: 10.179.78.217:8848
+        server-addr: 10.11.199.217:8848
       # nacos配置中心地址:
       config:
-        server-addr: 10.179.78.217:8848
+        server-addr: 10.11.199.217:8848
         file-extension: yml
         #beacon-push-dev.yml

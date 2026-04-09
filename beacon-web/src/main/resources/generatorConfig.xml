@@ -40,8 +40,9 @@
         </javaClientGenerator>
 
         <!--        生成那些表对应的信息-->
-        <table tableName="sms_role" domainObjectName="SmsRole" />
-        <table tableName="sms_menu" domainObjectName="SmsMenu" />
+<!--        <table tableName="sms_role" domainObjectName="SmsRole" />-->
+<!--        <table tableName="sms_menu" domainObjectName="SmsMenu" />-->
+        <table tableName="client_business" domainObjectName="clientBusiness" />
 
     </context>
 </generatorConfiguration>

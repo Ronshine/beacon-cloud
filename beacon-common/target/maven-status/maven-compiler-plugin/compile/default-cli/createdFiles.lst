@@ -1,6 +1,0 @@
-com\chl\common\enums\MobileTypeEnum.class
-com\chl\common\exception\StrategyException.class
-com\chl\common\constant\RabbitMQConstants.class
-com\chl\common\exception\ApiException.class
-com\chl\common\utils\SnowFlakeUtil.class
-com\chl\common\model\StandardReport.class
