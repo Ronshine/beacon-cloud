@@ -50,7 +50,7 @@ public class ClientBusinessController {
         //外部声明
         List<ClientBusiness> list = null;
         //3、通过用户是否为管理员区分可查询内容 管理员可以查询所有客户  非管理员只能查询所拥有的客户
-        if (!roleNameSet.isEmpty() && roleNameSet.contains(WebConstants.root)){
+        if (!roleNameSet.isEmpty() && roleNameSet.contains(WebConstants.ROOT)){
             //管理员可以查询所有客户
             list = clientBusinessService.findAll();
         }else {

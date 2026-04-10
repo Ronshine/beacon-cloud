@@ -10,6 +10,18 @@ spring:
     password: root
     url: jdbc:mysql://10.11.199.217:3306/beacon_cloud?useSSL=false&serverTimezone=UTC
     type: com.alibaba.druid.pool.DruidDataSource
+  application:
+    name: beacon-web
+  profiles:
+    active: dev
+  cloud:
+    nacos:
+      discovery:
+        server-addr: 10.11.199.217:8848
+      # nacos配置中心地址:
+      config:
+        server-addr: 10.11.199.217:8848
+        file-extension: yml
 mybatis:
   configuration:
     map-underscore-to-camel-case: true

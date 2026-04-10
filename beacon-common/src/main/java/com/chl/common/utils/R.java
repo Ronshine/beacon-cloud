@@ -43,6 +43,17 @@ public class R {
     }
 
     /**
+     * 正确响应,有数据Long total ,Object rows
+     * @return ResultVO响应对象
+     */
+    public static ResultVO ok(Long total ,Object rows){
+        ResultVO vo = ok();
+        vo.setTotal(total);
+        vo.setRows(rows);
+        return vo;
+    }
+
+    /**
      * 错误响应根据枚举返回对应错误码和信息
      * @param enums 对应错误枚举
      * @return ResultVO响应对象

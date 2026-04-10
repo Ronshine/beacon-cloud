@@ -27,4 +27,6 @@ public interface EsSearchService {
      * @param map 需要修改的参数构建的map
      */
     void update(String index, String id, Map<String,Object> map)throws IOException;
+
+    Map<String, Object> findSmsByParameters(Map<String, Object> map) throws IOException;
 }

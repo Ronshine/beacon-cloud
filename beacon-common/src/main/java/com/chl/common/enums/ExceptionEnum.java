@@ -23,7 +23,7 @@ public enum ExceptionEnum {
     AUTHENTICATION_ERROR(-102,"用户名或验证码错误"),
     NOT_LOGIN(-103, "用户未登录"),
     MAKE_MENU_FAIL(-104, "获取菜单列表失败!!"),
-    ;
+    SMS_NO_AUTHOR(-105, "无权限访问该公司短信信息");
 
     private final Integer code;
     private final String msg;

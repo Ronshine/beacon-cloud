@@ -11,6 +11,10 @@ public class SearchUtil {
         return LocalDateTime.now().getYear() + "";
     }
 
+    public static String getCurrentYearIndex(){
+        return INDEX + getYear();
+    }
+
     private static ThreadLocal<StandardReport> standardReportThreadLocal = new ThreadLocal<>();
 
     /**
